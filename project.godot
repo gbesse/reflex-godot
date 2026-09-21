@@ -1,0 +1,12 @@
+; Purpose: Run the Reflex Godot example and editor plugin.
+config_version=5
+[application]
+config/name="Reflex Godot"
+run/main_scene="res://demo/playground.tscn"
+[display]
+window/size/viewport_width=960
+window/size/viewport_height=640
+[rendering]
+renderer/rendering_method="gl_compatibility"
+[editor_plugins]
+enabled=PackedStringArray("res://addons/reflex_godot/plugin.cfg")

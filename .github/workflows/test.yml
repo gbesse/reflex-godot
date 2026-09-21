@@ -1,0 +1,29 @@
+# Purpose: Load the addon and test finite runtime behavior without exporting or building a game.
+name: Tests
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  godot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch checksum-pinned Godot 4.7.2
+        run: |
+          curl --fail --silent --show-error --location --max-time 180 --output /tmp/godot.zip https://github.com/godotengine/godot/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip
+          echo 'cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4  /tmp/godot.zip' | sha256sum --check
+          unzip -q /tmp/godot.zip -d /tmp/godot
+          chmod +x /tmp/godot/Godot_v4.7.2-stable_linux.x86_64
+      - name: Validate editor addon loading
+        run: |
+          set -o pipefail
+          /tmp/godot/Godot_v4.7.2-stable_linux.x86_64 --headless --path . --editor --quit 2>&1 | tee /tmp/editor.log
+          if grep -E 'SCRIPT ERROR|^ERROR:' /tmp/editor.log; then exit 1; fi
+      - name: Test guarded runtime and replay
+        run: /tmp/godot/Godot_v4.7.2-stable_linux.x86_64 --headless --path . --script tests/runtime_test.gd
+      - name: Load playable scene
+        run: |
+          set -o pipefail
+          /tmp/godot/Godot_v4.7.2-stable_linux.x86_64 --headless --path . --quit-after 3 2>&1 | tee /tmp/scene.log
+          if grep -E 'SCRIPT ERROR|^ERROR:' /tmp/scene.log; then exit 1; fi

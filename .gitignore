@@ -1,0 +1,5 @@
+.godot/
+.env
+.env.*
+*.log
+.DS_Store
