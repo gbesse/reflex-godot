@@ -28,6 +28,10 @@ The editor's **Reflex** dock opens the playground and creates inspectable `Refle
 
 The bundled runtime is a small market simulation, not a universal NPC engine, multiplayer authority or arbitrary action plugin registry. Behavior resources customize instructions and thresholds. New action semantics require a runtime extension as described in [the extension guide](docs/plugins.md).
 
+## Try a stale-revision rejection
+
+`godot --headless --path . --script demo/revision_guard.gd` runs a scripted two-action example: `rest` commits at revision 0, then a previously legal `sell:bo` request is rejected against the old revision. The journal has one event and no Jev call is made. This shows the commit-time guard without opening the playground.
+
 ## Optional Jev calls
 
 Start Godot from an environment with `TYPESAFE_API_KEY` set. **Use Jev** becomes available. Each click sends the world state and legal actions to the Typesafe `systemone` endpoint with model `jev-1.13.0`. Requests have a 15-second timeout, no redirects and a one-megabyte response limit. The alpha accepts 2–32 actions.
@@ -41,6 +45,7 @@ Live Jev inference has not been tested. The screenshot and included test fixture
 ```sh
 godot --headless --path . --editor --quit
 godot --headless --path . --script tests/runtime_test.gd
+godot --headless --path . --script demo/revision_guard.gd
 godot --headless --path . --quit-after 3
 ```
 
