@@ -22,6 +22,8 @@ jobs:
           if grep -E 'SCRIPT ERROR|^ERROR:' /tmp/editor.log; then exit 1; fi
       - name: Test guarded runtime and replay
         run: /tmp/godot/Godot_v4.7.2-stable_linux.x86_64 --headless --path . --script tests/runtime_test.gd
+      - name: Run stale revision example
+        run: /tmp/godot/Godot_v4.7.2-stable_linux.x86_64 --headless --path . --script demo/revision_guard.gd
       - name: Load playable scene
         run: |
           set -o pipefail
