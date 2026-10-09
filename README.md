@@ -56,3 +56,7 @@ The test script preloads the addon and playground scripts, then checks guarded e
 ## Where this can grow
 
 The shared asset could become a catalog of editable NPC behavior packs, game-specific guarded runtimes and replay fixtures. This alpha establishes the Resource and decision boundaries; it does not claim an existing community or an established competitive moat.
+
+## Contrôle d’adoption · Adoption check · Comprobación de adopción
+
+[Français : essayer un cas concret](examples/adoption-check.md) · [English: try a concrete case](examples/adoption-check.md) · [Español: pruebe un caso concreto](examples/adoption-check.md).
