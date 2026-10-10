@@ -40,3 +40,15 @@ FR : adaptez une copie de la fixture locale à cette situation, puis vérifiez l
 EN: adapt a copy of the local fixture to this situation, then check the behavior described above. Values are illustrative, not measured Jev output.
 
 ES: adapte una copia de la fixture local a esta situación y compruebe el comportamiento descrito arriba. Los valores son ilustrativos, no resultados Jev medidos.
+
+## Second cas · Second case · Segundo caso
+
+```text
+journal_action=trade; replay_result=different_state
+```
+
+**FR :** Une divergence entre le journal et l’état rejoué doit rester visible dans « Verify replay ». Elle indique un scénario à corriger avant de partager le pack.
+
+**EN:** A mismatch between the journal and replayed state should remain visible in “Verify replay”. Fix the scenario before sharing the pack.
+
+**ES:** Una discrepancia entre el registro y el estado reproducido debe seguir visible en «Verify replay». Corrija el escenario antes de compartir el paquete.
